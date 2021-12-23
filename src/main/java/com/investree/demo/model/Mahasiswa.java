@@ -7,20 +7,16 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@Table(name = "karyawan")
-public class Karyawan implements Serializable {
+@Table(name = "mahasiswa")
+public class Mahasiswa implements Serializable {
     @Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "nama", nullable = true, length = 45)
+    @Column(name = "nama", nullable = false, length = 45)
     private String nama;
-    @Column(name = "nik", length = 16)
-    private String nik;
-    @Column(name = "jabatan", length = 50)
-    private String jabatan;
-    @Column(name = "hp", length = 16)
-    private String hp;
+    @Column(name = "nim", nullable = false, length = 16)
+    private String nim;
     @Column(name = "alamat", columnDefinition="TEXT")
     private String alamat;
 }
