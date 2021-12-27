@@ -22,6 +22,6 @@ public interface MahasiswaRepository extends
     @Query("select c from Mahasiswa c")// nama class
     Page<Mahasiswa> getAllData(Pageable pageable);
 
-    @Query("select c from Mahasiswa c WHERE c.nama = :nama and c.nik = :nik ")
-    Page<Mahasiswa> getbyNamaAndNIK(String nama, String nik, Pageable pageable);
+    @Query("select c from Mahasiswa c WHERE c.nama = :nama and c.nim = :nim ")
+    Page<Mahasiswa> getbyNamaAndNim(String nama, String nim, Pageable pageable);
 }

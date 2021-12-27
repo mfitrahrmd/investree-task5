@@ -6,11 +6,13 @@ import com.investree.demo.view.MahasiswaInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
+@Transactional
 public class MahasiswaImpl implements MahasiswaInterface {
 
     @Autowired
@@ -48,7 +50,7 @@ public class MahasiswaImpl implements MahasiswaInterface {
             map.put("status", "failed");
             return map;
         }
-        return null;
+        return map;
     }
 
     @Override

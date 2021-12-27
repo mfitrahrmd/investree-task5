@@ -28,10 +28,10 @@ public class MahasiswaController {
     public ResponseEntity<Map> save(@RequestBody Mahasiswa objModel
     ) {
         Map save = serviceMahasiswa.insert(objModel);
-        return new ResponseEntity<Map>(save, HttpStatus.OK);// response
+        return new ResponseEntity<Map>(save, HttpStatus.OK);
     }
 
-    @PutMapping("")// 2 hanya ingin update alamat, apa yang perlu ditambahkan
+    @PutMapping("")
     public ResponseEntity<Map> update(@RequestBody Mahasiswa objModel
     ) {
         Map update = serviceMahasiswa.update(objModel);
@@ -45,17 +45,25 @@ public class MahasiswaController {
         return new ResponseEntity<Map>(update, HttpStatus.OK);// response
     }
 
+    @GetMapping("")
+    public ResponseEntity<Map>  getList() {
+        Map map = new HashMap();
+        map.put("data",mahasiswaRepository.findAll());
+        map.put("code", "200");
+        map.put("status", "success");
+        return new ResponseEntity<Map>(map, HttpStatus.OK);
+    }
+
     @GetMapping("/list")
-// 3 jika ingin filter by nama dan NIK, bagian code mana yang perlu ditambahkan ? gunakan JPA  untuk query
     public ResponseEntity<Map> getListData(
             @RequestParam() Integer page,
             @RequestParam() Integer size,
             @RequestParam(required = false) String nama,
-            @RequestParam(required = false) String nik) {
+            @RequestParam(required = false) String nim) {
         Pageable show_data = PageRequest.of(page, size);
         Page<Mahasiswa> list = null;
-        if (nama != null && nik != null) {
-            mahasiswaRepository.getbyNamaAndNIK(nama,nik, show_data);
+        if (nama != null && nim != null) {
+            mahasiswaRepository.getbyNamaAndNim(nama,nim, show_data);
         } else
         if (nama != null) {
             mahasiswaRepository.getbyNama(nama, show_data);
