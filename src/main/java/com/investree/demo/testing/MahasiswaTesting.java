@@ -60,7 +60,7 @@ public class MahasiswaTesting {
         headers.set("Content-Type", "application/json");
         HttpEntity<String> entity = new HttpEntity<String>(null, headers);
 
-        Long id = 1L;
+        Long id = 2L;
         ResponseEntity<String> exchange = restTemplate.exchange("http://localhost:8081/api/v1/mhs/" + id, HttpMethod.DELETE, entity, String.class);
 
         assertEquals(HttpStatus.OK, exchange.getStatusCode());
