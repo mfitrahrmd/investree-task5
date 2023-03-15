@@ -30,6 +30,20 @@ public class TransaksiController {
         ));
     }
 
+    @PutMapping("/{idTransaksi}")
+    public ResponseEntity<Map> updateStatus(@PathVariable Long idTransaksi) {
+        Transaksi t = new Transaksi();
+        t.setId(idTransaksi);
+
+        Transaksi updatedTransaksi = (Transaksi) transaksiService.updateStatus(t).get("transaksi");
+
+        return ResponseEntity.ok().body(Map.of(
+                "data", updatedTransaksi,
+                "status", "sukses",
+                "code", HttpStatus.OK.value()
+        ));
+    }
+
     // Request validation handler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
