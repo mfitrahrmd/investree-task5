@@ -3,6 +3,7 @@ package com.investree.demo.controller;
 import com.investree.demo.model.Transaksi;
 import com.investree.demo.view.TransaksiService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -42,6 +43,13 @@ public class TransaksiController {
                 "status", "sukses",
                 "code", HttpStatus.OK.value()
         ));
+    }
+
+    @GetMapping
+    public ResponseEntity<Page> list(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size, @RequestParam(required = false) String status) {
+        Page<Transaksi> transaksiPage = (Page<Transaksi>) transaksiService.list(page, size, status).get("transaksiPage");
+
+        return ResponseEntity.ok().body(transaksiPage.map(transaksi -> SaveTransaksiRes.to(transaksi)));
     }
 
     // Request validation handler
